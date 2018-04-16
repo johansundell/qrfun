@@ -14,7 +14,7 @@ import (
 
 func main() {
 	intf := flag.String("interface", ":8080", "The networkinterface and port to run on")
-
+	flag.Parse()
 	http.HandleFunc("/", decodeBin)
 	//http.HandleFunc("/base64", decodeBase64)
 	log.Println(http.ListenAndServe(*intf, nil))
@@ -50,7 +50,6 @@ func decodeBase64(w http.ResponseWriter, r *http.Request) {
 }
 
 func decodeBin(w http.ResponseWriter, r *http.Request) {
-	log.Println("Start")
 	err := r.ParseMultipartForm(100000)
 	if err != nil {
 		log.Println(err)
